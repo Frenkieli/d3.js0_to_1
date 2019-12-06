@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <script>
+    //   var data = [1,2,3,4,5];
+    //   d3.select('body').selectAll('div').data(data).enter().append('div').text(function(d){
+    //    return d;
+    // });
+    var data = [38, 69, 72, 42, 58, 87];
+
+    d3.select('body').selectAll('div')
+      .data(data)
+      .enter()
+      .append('div')
+      .text(function (d) {
+        return d;
+      }).style({
+        'color': function (d) {
+          if (d < 60) {
+            return 'red'
+          }
+        },
+        'width': function (d) {
+          return d + 'px'
+        },
+        'margin': '2px 0',
+        'background': '#aaa',
+      });
+    console.log('min: ' + d3.min(data));         //最小值
+    console.log('max: ' + d3.max(data));         //最大值
+    console.log('sum: ' + d3.sum(data));         //總和
+    console.log('extent: ' + d3.extent(data));   //最小值與最大值
+    console.log('mean: ' + d3.mean(data));       //平均數
+    console.log('shuffle: ' + d3.shuffle(data)); //亂數排列
+  </script>
+</body>
+
+</html>

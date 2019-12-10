@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <script>
+    var data = [
+      { name: 'Tom', score: 98, type: 'class1', sex: 'man' },
+      { name: 'Jack', score: 72, type: 'class2', sex: 'man' },
+      { name: 'Owen', score: 93, type: 'class3', sex: 'man' },
+      { name: 'Mark', score: 41, type: 'class4', sex: 'man' },
+      { name: 'Marry', score: 67, type: 'class4', sex: 'woman' },
+      { name: 'Rock', score: 59, type: 'class2', sex: 'man' },
+      { name: 'Jason', score: 83, type: 'class1', sex: 'man' },
+      { name: 'Peter', score: 47, type: 'class3', sex: 'man' },
+      { name: 'Cherry', score: 53, type: 'class1', sex: 'woman' },
+      { name: 'Jean', score: 68, type: 'class4', sex: 'woman' }
+    ];
+
+    // 根據key進行分類,出來是陣列
+    // var a = d3.nest()
+    //   .key(d => d.type)
+    //   .key(d => d.sex)
+    //   .entries(data);
+    // nest.sortKeys(comparator)
+    // var a = d3.nest()
+    //   .key(d => d.score)
+    //   .sortKeys(d3.descending)
+    //   .entries(data);
+
+    // var b = d3.nest()
+    //   .key(function (d) { return d.score; })
+    //   .sortKeys(d3.ascending)  //升冪
+    //   .entries(data);
+
+    // var a = d3.nest()
+    //   .key(function (d) { return d.score; })
+    //   .sortKeys(function (a) { return a > 60 ? -1 : 1 })
+    //   .entries(data);
+
+    // var b = d3.nest()
+    //   .key(function (d) { return d.score; })
+    //   .sortKeys(function (a) { return a > 60 ? 1 : -1 })
+    //   .entries(data);
+
+    // var a = d3.nest()
+    //   .key(d => d.type)
+    //   .sortValues((a, b) => a.score > b.score ? -1 : 1)
+    //   .entries(data);
+
+    // var b = d3.nest()
+    //   .key(d => d.type)
+    //   .sortValues((a, b) => a.score > b.score ? 1 : -1)
+    //   .entries(data);
+
+    // var a = d3.nest()
+    //   .key(d => d.type)
+    //   .rollup(d => d.length)
+    //   .entries(data)
+
+    // var a = d3.nest()
+    //   .key(d => d.type)
+    //   .rollup(d => d3.sum(d,dd=>dd.score))
+    //   .entries(data)
+
+    var a = d3.nest()
+      .key(function (d) { return d.sex; })
+      .key(function (d) { return d.type; })
+      .entries(data);
+
+    var b = d3.nest()
+      .key(function (d) { return d.sex; })
+      .key(function (d) { return d.type; })
+      .map(data);
+
+    // console.log({ a });
+    console.log({ a, b });
+  </script>
+</body>
+
+</html>

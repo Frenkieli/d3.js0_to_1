@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+
+  <svg id='s'></svg>
+  <script>
+    var data = [
+      { x: 0, y: 18 },
+      { x: 20, y: 27 },
+      { x: 40, y: 56 },
+      { x: 60, y: 34 },
+      { x: 80, y: 41 },
+      { x: 100, y: 35 },
+      { x: 120, y: 100 },
+      { x: 140, y: 37 },
+      { x: 160, y: 26 },
+      { x: 180, y: 21 }
+    ];
+
+    // var data = [
+    //   { x: 20, y: 0 },
+    //   { x: 25, y: 20 },
+    //   { x: 48, y: 40 },
+    //   { x: 30, y: 60 },
+    //   { x: 43, y: 80 },
+    //   { x: 55, y: 100 },
+    //   { x: 67, y: 120 },
+    //   { x: 28, y: 140 },
+    //   { x: 16, y: 160 },
+    //   { x: 38, y: 180 }
+    // ];
+
+    // var data = [
+    //   { x: 0, y0: 0, y1: 20 },
+    //   { x: 20, y0: 10, y1: 30 },
+    //   { x: 40, y0: 30, y1: 80 },
+    //   { x: 60, y0: 60, y1: 70 },
+    //   { x: 80, y0: 40, y1: 40 },
+    //   { x: 100, y0: 40, y1: 20 },
+    //   { x: 120, y0: 50, y1: 30 },
+    //   { x: 140, y0: 50, y1: 40 },
+    //   { x: 160, y0: 40, y1: 20 },
+    // ];
+
+    var width = 240,
+      height = 120;
+
+    var s = d3.select('#s');
+
+    s.attr({
+      'width': width,
+      'height': height
+    });
+
+    // var area = d3.svg.area()
+    //   .x(d => d.x)
+    //   .y0(0)
+    //   .y1(d => d.y);
+
+    // var area = d3.svg.area()
+    //   .y(d => d.y)
+    //   .x0(0)
+    //   .x1(d => d.x);
+
+    // var area = d3.svg.area()
+    //   .x(function (d) { return d.x; })
+    //   .y0(function (d) { return d.y0; })
+    //   .y1(function (d) { return d.y1; });
+
+    // s.append('path')
+    //   .attr({
+    //     'd': area(data),
+    //     'stroke': '#c00',
+    //     'fill': 'rgba(255,0,0,.3)',
+    //     'transform': 'translate(2,2)'
+    //   })
+
+
+    // //對照組
+    // var area1 = d3.svg.area()
+    //   .x(function (d) { return d.x; })
+    //   .y0(0)
+    //   .y1(function (d) { return d.y; });
+
+    // //實驗組
+    // var area2 = d3.svg.area()
+    //   .x(function (d) { return d.x; })
+    //   .y0(0)
+    //   .y1(function (d) { return d.y; })
+    //   .interpolate('step');
+
+    //對照組
+    var area1 = d3.svg.area()
+      .x(function (d) { return d.x; })
+      .y0(0)
+      .y1(function (d) { return d.y; });
+
+    //實驗組
+    var area2 = d3.svg.area()
+      .x(function (d) { return d.x; })
+      .y0(0)
+      .y1(function (d) { return d.y; })
+      .defined(function (d) { return d.x % 3 != 0; });
+
+    s.append('path')
+      .attr({
+        'd': area1(data),
+        'stroke': '#00c',
+        'fill': 'rgba(0,0,255,.1)',
+        'transform': 'translate(2,2)'
+      });
+    s.append('path')
+      .attr({
+        'd': area2(data),
+        'stroke': '#c00',
+        'fill': 'rgba(255,0,0,.3)',
+        'transform': 'translate(2,2)'
+      });
+
+  </script>
+</body>
+
+</html>

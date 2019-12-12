@@ -17,7 +17,9 @@
 https://github.com/d3/d3/wiki/Tutorials
 
 
-## [目前已經有Demo的圖形化資料]('https://github.com/d3/d3/wiki/Gallery')
+## [官方Demo表]('https://github.com/d3/d3/wiki/Gallery')
+---
+### 下方自我練習用
 ---
 #### [D3LiquidFillGauge]('http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6')
 

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <svg></svg>
+  <script>
+    var data = [
+      { x: 'a', y: 135 },
+      { x: 'b', y: 138 },
+      { x: 'c', y: 132 },
+      { x: 'd', y: 121 },
+      { x: 'e', y: 126 },
+      { x: 'f', y: 140 },
+      { x: 'g', y: 123 },
+      { x: 'h', y: 89 },
+      { x: 'i', y: 79 },
+      { x: 'j', y: 83 }
+    ];
+
+    var s = d3.select('svg');
+
+    var height = 120,
+      width = 200;
+
+    s.attr({
+      'width': width,
+      'height': 200,
+    }).style({
+      'border': '1px solid #000'
+    });
+
+    var scaleX1 = d3.scale
+      .ordinal()
+      .domain(data.map(function (d) { return (d.x); }))
+      .range([0, width]);
+
+    var scaleX2 = d3.scale
+      .ordinal()
+      .domain(data.map(function (d) { return (d.x); }))
+      .range([0, 20, 40, 60, 80, 100, 120, 140, 160, 180]);
+
+
+    var scaleX3 = d3.scale
+      .ordinal()
+      .domain(data.map(function (d) { return (d.x); }))
+      .rangePoints([0,width]);
+
+    var scaleX4 = d3.scale
+      .ordinal()
+      .domain(data.map(function (d) { return (d.x); }))
+      // .rangePoints([0,width],1);
+      .rangeBands([0,width],1,0);
+      // .rangeRoundPoints([0,width],1); //出來的path結果會盡可能的接近整數
+    console.log(scaleX4.rangeBand(),'scaleX4.rangeBand')
+    console.log(scaleX4.rangeExtent(),'scaleX4.rangeExtent')
+    var scaleX5 = scaleX4.copy();
+    // scaleX5 = '不見了';
+    console.log(scaleX5,'scaleX4.copy',scaleX4)
+    var scaleY = d3.scale
+      .linear()
+      .domain([0, 150])
+      .range([height, 0]);
+
+    var line1 = d3.svg.line()
+      .x(function (d) {
+        return scaleX1(d.x);
+      }).y(function (d) {
+        return scaleY(d.y);
+      });
+
+    var line2 = d3.svg.line()
+      .x(function (d) {
+        return scaleX2(d.x);
+      }).y(function (d) {
+        return scaleY(d.y);
+      });
+
+    var line3 = d3.svg.line()
+      .x(function (d) {
+        return scaleX3(d.x);
+      }).y(function (d) {
+        return scaleY(d.y);
+      });
+    var line4 = d3.svg.line()
+      .x(function (d) {
+        return scaleX4(d.x);
+      }).y(function (d) {
+        return scaleY(d.y);
+      });
+
+    s.append('path')
+      .attr({
+        'd': line1(data),
+        'stroke': '#09c',
+        'fill': 'none'
+      });
+
+    s.append('path')
+      .attr({
+        'd': line2(data),
+        'stroke': '#f66',
+        'fill': 'none',
+        'transform': 'translate(0,70)'
+      });
+    s.append('path')
+      .attr({
+        'd': line3(data),
+        'stroke': '#fa0',
+        'fill': 'none',
+        'transform': 'translate(0,100)'
+      });
+    s.append('path')
+      .attr({
+        'd': line4(data),
+        'stroke': '#0af',
+        'fill': 'none',
+        'transform': 'translate(0,120)'
+      });
+  </script>
+
+</body>
+
+
+</html>

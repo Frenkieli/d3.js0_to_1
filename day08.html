@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <script>
+    var data = [
+      { name: 'Tom', type: ['a', 'b', 'c'] },
+      { name: 'Jack', type: ['b,c'] },
+      { name: 'Owen', type: ['c', 'd', 'e'] },
+      { name: 'Mark', type: ['a', 'c'] },
+      { name: 'Marry', type: ['a', 'b', 'c', 'd'] },
+      { name: 'Rock', type: ['a', 'c'] },
+      { name: 'Jason', type: ['b', 'c'] },
+      { name: 'Peter', type: ['a', 'b', 'c'] },
+      { name: 'Cherry', type: ['c', 'd'] },
+      { name: 'Jean', type: ['a', 'c', 'd'] }
+    ];
+    var i = d3.map(data, function (d) { return d.name; });
+    var j = d3.map(data, function (d) { return d.type; });
+    var emptyData = [];
+    var z = d3.map(emptyData, function (d) { return d.name; });
+    console.log('==========d3.map==========')
+    console.log({ i, j })
+
+
+    console.log('==========map.has==========')
+    console.log(i.has('Tom'));
+    console.log(i.has('Rock'));
+    console.log(i.has('rock'));
+    console.log(i.has('oxxo'));
+
+
+    console.log('==========map.get==========');
+    console.log(i.get('Tom'));
+    console.log(i.get('Owen'));
+    console.log(i.get('oxxo'));
+
+    // =====================================================
+    // console.log('==========map.set==========');
+    // console.log(i.set('Tom','hello world?!'));
+    // console.log(i);
+    // console.log(data); 
+
+
+    // console.log('==========map.remove==========');
+    // console.log(i.remove('Jack')); 
+    // console.log(i);  
+    // console.log(data);  
+    // console.log(i.remove('Jack')); 
+    // =====================================================
+
+
+    console.log('==========map.key==========');
+    var arr = i.keys();
+    console.log(arr);
+
+
+    console.log('==========map.values==========');
+    var arrV = i.values();
+    console.log(arrV);
+
+
+    console.log('==========map.size==========');
+    console.log(i.size());  //10
+
+
+    console.log('==========map.empty==========');
+    console.log(i.empty());  //false
+    console.log(z.empty());  //true
+
+
+    console.log('==========map.forEach==========');
+    var fe = i.forEach(function (n) { console.log(n); });
+
+    console.log(fe); //回傳 undefined
+
+  </script>
+
+</body>
+
+</html>

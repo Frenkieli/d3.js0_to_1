@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+
+<body>
+  <div id="red"></div>
+  <div id="green"></div>
+  <div id="yellow"></div>
+  <div id="blue"></div>
+
+  <script>
+    var d = d3.selectAll('div'),
+      r = d3.select('#red'),
+      g = d3.select('#green'),
+      y = d3.select('#yellow'),
+      b = d3.select('#blue');
+
+    d.style({
+      'width': '80px',
+      'height': '80px',
+      'display': 'inline-block',
+      'margin': '3px'
+    });
+
+    var red = d3.rgb('red');
+    var green = d3.rgb(0, 255, 0);
+    var yellow = d3.rgb('#ff0');
+    var blue = d3.rgb(0, 0, 255);
+
+    r.style({
+      'background': red
+    });
+    g.style({
+      'background': green
+    });
+    y.style({
+      'background': yellow
+    });
+    b.style({
+      'background': blue
+    });
+
+    red = d3.rgb(50,0,0);
+
+    r.style({
+      'background': red.brighter(0)
+    });
+    g.style({
+      'background': red.brighter(1)
+    });
+    y.style({
+      'background': red.brighter(2)
+    });
+    b.style({
+      'background': red.brighter(3)
+    });
+
+
+    red = d3.rgb(255,0,0);
+
+    r.style({
+      'background': red.darker(0)
+    });
+    g.style({
+      'background': red.darker(1)
+    });
+    y.style({
+      'background': red.darker(2)
+    });
+    b.style({
+      'background': red.darker(3)
+    });
+
+    console.log(red.hsl(),'hsl');
+    console.log(red.toString(),'toString');
+
+
+  </script>
+</body>
+
+</html>

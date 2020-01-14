@@ -86,19 +86,6 @@
     //   })
 
 
-    // //對照組
-    // var area1 = d3.svg.area()
-    //   .x(function (d) { return d.x; })
-    //   .y0(0)
-    //   .y1(function (d) { return d.y; });
-
-    // //實驗組
-    // var area2 = d3.svg.area()
-    //   .x(function (d) { return d.x; })
-    //   .y0(0)
-    //   .y1(function (d) { return d.y; })
-    //   .interpolate('step');
-
     //對照組
     var area1 = d3.svg.area()
       .x(function (d) { return d.x; })
@@ -110,7 +97,20 @@
       .x(function (d) { return d.x; })
       .y0(0)
       .y1(function (d) { return d.y; })
-      .defined(function (d) { return d.x % 3 != 0; });
+      .interpolate('step');
+
+    // //對照組
+    // var area1 = d3.svg.area()
+    //   .x(function (d) { return d.x; })
+    //   .y0(0)
+    //   .y1(function (d) { return d.y; });
+
+    // //實驗組
+    // var area2 = d3.svg.area()
+    //   .x(function (d) { return d.x; })
+    //   .y0(0)
+    //   .y1(function (d) { return d.y; })
+    //   .defined(function (d) { return d.x % 3 != 0; });
 
     s.append('path')
       .attr({

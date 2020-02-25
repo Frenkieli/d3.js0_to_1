@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #r {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: #000;
+    }
+  </style>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+
+      var drag = d3.behavior.drag()
+        .on('dragstart', function () {
+          console.log(d3.event)
+          rect.style({ 'background': 'red' });
+        })
+        .on('drag', function () {
+          console.log(d3.event)
+          rect.style({
+            'left': (d3.event.x - 25) + 'px',
+            'top': (d3.event.y - 25) + 'px',
+            'background': 'green'
+          });
+        })
+        .on('dragend', function () {
+          console.log(d3.event)
+          rect.style({ 'background': '#000' });
+        });
+
+      var rect = d3.select('#r')
+        .style({ 'left': '50px', 'top': '50px' })
+        .call(drag);
+    }, false);
+  </script>
+</head>
+
+<body>
+  <div id="r"></div>
+</body>
+
+</html>

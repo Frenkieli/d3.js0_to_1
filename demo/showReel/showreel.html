@@ -61,10 +61,11 @@
       // Nest stock values by symbol.
       symbols = d3.nest()
         .key(function (d) { return d.symbol; })
-        .entries(stocks = data);
+        .entries(d = data);
 
       // Parse dates and numbers. We assume values are sorted by date.
       // Also compute the maximum price per symbol, needed for the y-domain.
+      console.log(data);
       symbols.forEach(function (s) {
         s.values.forEach(function (d) { d.date = parse(d.date); d.price = +d.price; });
         s.maxPrice = d3.max(s.values, function (d) { return d.price; });
@@ -81,8 +82,9 @@
       console.log(symbols);
       setTimeout(lines, duration);
     });
-
+    // 第一個線圖
     function lines() {
+      console.log('lines');
       x = d3.time.scale().range([0, w - 60]);
       y = d3.scale.linear().range([h / 4 - 20, 0]);
 
@@ -137,8 +139,9 @@
         }
       });
     }
-
+    //  第二型態
     function horizons() {
+      console.log('horizons');
       svg.insert("defs", ".symbol")
         .append("clipPath")
         .attr("id", "clip")
@@ -195,6 +198,7 @@
     }
 
     function areas() {
+      console.log('areas');
       var g = svg.selectAll(".symbol");
 
       axis
@@ -239,6 +243,7 @@
     }
 
     function stackedArea() {
+      console.log('stackedArea');
       var stack = d3.layout.stack()
         .values(function (d) { return d.values; })
         .x(function (d) { return d.date; })
@@ -278,6 +283,7 @@
     }
 
     function streamgraph() {
+      console.log('streamgraph');
       var stack = d3.layout.stack()
         .values(function (d) { return d.values; })
         .x(function (d) { return d.date; })
@@ -308,6 +314,7 @@
     }
 
     function overlappingArea() {
+      console.log('overlappingArea');
       var g = svg.selectAll(".symbol");
 
       line
@@ -357,6 +364,7 @@
     }
 
     function groupedBar() {
+      console.log('groupedBar');
       x = d3.scale.ordinal()
         .domain(symbols[0].values.map(function (d) { return d.date; }))
         .rangeBands([0, w - 60], .1);
@@ -397,6 +405,7 @@
     }
 
     function stackedBar() {
+      console.log('stackedBar')
       x.rangeRoundBands([0, w - 60], .1);
 
       var stack = d3.layout.stack()
@@ -440,6 +449,7 @@
     }
 
     function transposeBar() {
+      console.log('transposeBar');
       x
         .domain(symbols.map(function (d) { return d.key; }))
         .rangeRoundBands([0, w], .2);
@@ -481,6 +491,7 @@
     }
 
     function donut() {
+      console.log('donut');
       var g = svg.selectAll(".symbol");
 
       g.selectAll("rect").remove();
@@ -535,6 +546,7 @@
     }
 
     function donutExplode() {
+      console.log('donutExplode')
       var r0a = h / 2 - x.rangeBand() / 2,
         r1a = h / 2,
         r0b = 2 * h - x.rangeBand() / 2,

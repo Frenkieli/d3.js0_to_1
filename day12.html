@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <script>
+    var d = new Date('2014,12,01,12:16:05');
+
+    var _a = d3.time.format("%a"); // 星期幾的縮寫
+    var _A = d3.time.format("%A"); // 星期幾
+    var _b = d3.time.format("%b"); // 月份的縮寫
+    var _B = d3.time.format("%B"); // 月份
+    var _c = d3.time.format("%c"); // 日期時間的組合 ( 星期縮寫 + 月份縮寫 + 日期 + 時 + 分 + 秒 + 年 )
+    var _d = d3.time.format("%d"); // 一個月的哪一天 ( 十進位,01 到 31，個位數開頭有 0 )
+    var _e = d3.time.format("%e"); // 一個月的哪一天 ( 十進位,1 到 31 )
+    var _H = d3.time.format("%H"); // 24 小時制 ( 00 到 23 ).
+    var _I = d3.time.format("%I"); // 12 小時制 ( 01 到 12 ).
+    var _j = d3.time.format("%j"); // 一年的哪一天 ( 十進位,001 到 366 )
+    var _m = d3.time.format("%m"); // 一年的哪一個月 ( 十進位,01 到 12 )
+    var _M = d3.time.format("%M"); // 分鐘 ( 十進位,00 到 59 )
+    var _L = d3.time.format("%L"); // 毫秒 ( 十進位,000 到 999 )
+    var _p = d3.time.format("%p"); // AM 或 PM.
+    var _S = d3.time.format("%S"); // 第幾秒 ( 十進位,00 到 61 )
+    var _U = d3.time.format("%U"); // 一年內的第幾周 ( 十進位,00 到 53，星期一開頭 )
+    var _w = d3.time.format("%w"); // 一周內的第幾天 ( 十進位,0 到 6，0 是星期天 )
+    var _W = d3.time.format("%W"); // 一年內的第幾周 ( 十進位,00 到 53，星期天開頭 )
+    var _x = d3.time.format("%x"); // 日期組合 ( 月份縮寫 + 日期 + 年 )
+    var _X = d3.time.format("%X"); // 時間組合 ( 小時 + 分 + 秒 )
+    var _y = d3.time.format("%y"); // 西元年後兩位數的年份 ( 十進位,00 到 99 )
+    var _Y = d3.time.format("%Y"); // 西元年
+    var _Z = d3.time.format("%Z"); // 時區偏移量
+
+
+
+    console.log(d); //Mon Dec 01 2014 12:16:05 GMT+0800 (台北標準時間)
+
+    console.log("%a", _a(d)); //Mon
+    console.log("%A", _A(d)); //Monday
+    console.log("%b", _b(d)); //Dec
+    console.log("%B", _B(d)); //December
+    // %c%d是console的保留字喔
+    console.log("%c " + _c(d)); //Mon Dec  1 12:16:05 2014
+    console.log("%d " + _d(d)); //01
+    console.log("%e", _e(d)); // 1
+    console.log("%H", _H(d)); //12
+    console.log("%I", _I(d)); //12
+    console.log("%j", _j(d)); //335
+    console.log("%m", _m(d)); //12
+    console.log("%M", _M(d)); //16
+    console.log("%L", _L(d)); //000
+    console.log("%p", _p(d)); //PM
+    console.log("%S", _S(d)); //05
+    console.log("%U", _U(d)); //48
+    console.log("%w", _w(d)); //1
+    console.log("%W", _W(d)); //48
+    console.log("%x", _x(d)); //12/01/2014
+    console.log("%X", _X(d)); //12:16:05
+    console.log("%y", _y(d)); //14
+    console.log("%Y", _Y(d)); //2014
+    console.log("%Z", _Z(d)); //+0800
+
+    // 上方是基本原理
+    console.log('===================================================');
+    var Ymd = d3.time.format("%Y-%m-%d");
+    var pIM = d3.time.format("(%p)%I:%M");
+
+    console.log("%Y-%m-%d", Ymd(d)); //2014-12-16
+    console.log("(%p)%I:%M", pIM(d)); //(PM)12:16
+    console.log('===================================================');
+
+    var _x = d3.time.format("%x");
+
+    var a = _x(d);
+
+    var dd = '2014/12/30 12:05:18';
+
+    console.log(a);            //12/01/2014
+    console.log(_x.parse(a));  //Mon Dec 01 2014 00:00:00 GMT+0800 (台北標準時間)
+    console.log(_x.parse(dd)); //null
+    console.log('===================================================');
+
+    var customTimeFormat = d3.time.format.multi([
+      [".%L", function (d) { return d.getMilliseconds(); }],
+      [":%S", function (d) { return d.getSeconds(); }],
+      ["%I:%M", function (d) { return d.getMinutes(); }],
+      ["%I %p", function (d) { return d.getHours(); }],
+      ["%a %d", function (d) { return d.getDay() && d.getDate() != 1; }],
+      ["%b %d", function (d) { return d.getDate() != 1; }],
+      ["%B", function (d) { return d.getMonth(); }],
+      ["%Y", function () { return true; }]
+    ]);
+
+    var margin = { top: 250, right: 40, bottom: 250, left: 40 },
+      width = 960 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+    var x = d3.time.scale()
+      .domain([new Date(2012, 0, 1), new Date(2013, 0, 1)])
+      .range([0, width]);
+
+    // 時間縮減自動變化
+    // var x = d3.time.scale()
+    //   .domain([new Date(2012, 0, 1), new Date(2012, 3, 1)])
+    //   .range([0, width]);
+
+    var xAxis = d3.svg.axis()
+      .scale(x)
+      .tickFormat(customTimeFormat);
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+      
+    console.log('===================================================');
+
+    var d = new Date();
+
+    var f = d3.time.format("%c");
+    var u = d3.time.format.utc(f(d));
+    var i = d3.time.format.iso(d);
+
+    console.log(d);    //Mon Dec 29 2014 23:15:05 GMT+0800 (台北標準時間)
+    console.log(f(d)); //Mon Dec 29 23:15:05 2014
+    console.log(u);    //Mon Dec 29 23:15:05 2014
+    console.log(i);    //2014-12-29T15:15:05.665Z
+
+  </script>
+</body>
+
+</html>

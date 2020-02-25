@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+
+  <style>
+    div {
+      position: absolute;
+      display: inline-block;
+      box-sizing: border-box;
+      top: 30px;
+      width: 100px;
+      height: 100px;
+      padding: 5px;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .box1 {
+      left: 10px;
+      background: #095;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="d3Transition()">RESET</button>
+  <br />
+  <div class="box1">
+  </div>
+
+  <script>
+    d3Transition();
+    function d3Transition() {
+      d3.selectAll('div')
+        .transition()
+        .style({
+          'top': '30px',
+          'left': '10px'
+        });
+      d3.select('.box1')
+        .transition()
+        .duration(500)
+        .style('top', '100px')
+        .transition()
+        .duration(500)
+        .style('left', '100px')
+        .transition()
+        .duration(500)
+        .style('top', '30px')
+        .transition()
+        .duration(500)
+        .style('left', '10px');
+    }
+  </script>
+
+</body>
+
+</html>
